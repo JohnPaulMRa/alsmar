@@ -11,7 +11,8 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogIn, LogOut, User, Settings } from "lucide-react";
-import AuthForm from "./AuthForm";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 interface UserMenuProps {
   onLogin?: () => void;
@@ -31,6 +32,7 @@ const UserMenu = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
 
   // Check if user is logged in on component mount
   useEffect(() => {
@@ -136,11 +138,19 @@ const UserMenu = ({
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
-            <AuthForm
-              onLogin={handleLogin}
-              onSignup={handleLogin}
-              onClose={() => setIsAuthDialogOpen(false)}
-            />
+            {authMode === "signin" ? (
+              <SignIn
+                onLogin={handleLogin}
+                onClose={() => setIsAuthDialogOpen(false)}
+                onSwitchToSignUp={() => setAuthMode("signup")}
+              />
+            ) : (
+              <SignUp
+                onSignup={handleLogin}
+                onClose={() => setIsAuthDialogOpen(false)}
+                onSwitchToSignIn={() => setAuthMode("signin")}
+              />
+            )}
           </DialogContent>
         </Dialog>
       )}

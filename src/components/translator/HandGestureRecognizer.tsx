@@ -213,9 +213,68 @@ const HandGestureRecognizer = ({
             <CardContent className="p-6">
               {hasPermission === null ? (
                 <div className="flex flex-col items-center justify-center p-8">
-                  <Button onClick={setupCamera} size="lg" className="mb-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mb-6">
+                    <div className="bg-gray-200 dark:bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center aspect-video relative overflow-hidden">
+                      <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
+                        <div className="relative w-24 h-24 rounded-full bg-gray-300 dark:bg-gray-600 overflow-hidden border-2 border-white dark:border-gray-500">
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="absolute inset-0 w-full h-full text-gray-500 dark:text-gray-400 p-2"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/20 p-2 flex items-center justify-center">
+                        <div className="flex items-center justify-center gap-4 bg-gray-300 dark:bg-gray-600 rounded-full py-1 px-4">
+                          <Camera className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-4 w-4 text-gray-600 dark:text-gray-400"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-200 dark:bg-gray-700 rounded-lg p-6 flex flex-col items-center justify-center aspect-video relative">
+                      <div className="text-gray-700 dark:text-gray-300 mb-2 font-medium">
+                        ASL Translation
+                      </div>
+                      <div className="flex-grow w-full flex items-center justify-center">
+                        <div className="text-2xl font-bold text-gray-400 dark:text-gray-500">
+                          Hello
+                        </div>
+                      </div>
+                      <div className="mt-auto w-full flex items-center justify-between">
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          Confidence: 95%
+                        </div>
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-5 w-5 text-gray-600 dark:text-gray-400"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={setupCamera}
+                    size="lg"
+                    className="mb-4 bg-blue-600 hover:bg-blue-700"
+                  >
                     <Camera className="mr-2 h-5 w-5" />
-                    Enable Camera
+                    Enable Camera to See You
                   </Button>
                   <p className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-md">
                     Camera access is required for hand gesture recognition. Your
