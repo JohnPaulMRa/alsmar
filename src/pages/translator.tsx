@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import CameraTranslator from "@/components/translator/CameraTranslator";
+import CameraTranslator from "@/components/translator/CameraTranslator.jsx";
 
 const TranslatorPage = () => {
   return (
