@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASL Gesture Learning</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="logo">
+          <div class="logo-circle">ASL</div>
+          <span class="logo-text">ASL Gestures</span>
+        </div>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="#" class="nav-link active">Home</a></li>
+            <li><a href="#" class="nav-link">Translator</a></li>
+            <li><a href="#" class="nav-link">Gesture Library</a></li>
+            <li><a href="#" class="nav-link">My Progress</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="Search gestures..."
+              class="search-input"
+            />
+            <button class="search-button"><i class="fas fa-search"></i></button>
+          </div>
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="user-button" id="userButton">
+            <i class="fas fa-user"></i>
+          </button>
+        </div>
+        <button class="mobile-menu-button" id="mobileMenuButton">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <div class="logo-circle">ASL</div>
+        <button class="close-menu" id="closeMenu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="mobile-nav">
+        <ul class="mobile-nav-list">
+          <li>
+            <a href="#" class="mobile-nav-link"
+              ><i class="fas fa-home"></i> Home</a
+            >
+          </li>
+          <li>
+            <a href="#" class="mobile-nav-link"
+              ><i class="fas fa-camera"></i> Translator</a
+            >
+          </li>
+          <li>
+            <a href="#" class="mobile-nav-link"
+              ><i class="fas fa-book-open"></i> Gesture Library</a
+            >
+          </li>
+          <li>
+            <a href="#" class="mobile-nav-link"
+              ><i class="fas fa-chart-bar"></i> My Progress</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Learn American Sign Language
+              <span class="highlight">Interactively</span>
+            </h1>
+            <p class="hero-description">
+              Master ASL gestures through our intuitive learning platform with
+              real-time translation. Track your progress and build your signing
+              vocabulary at your own pace.
+            </p>
+            <div class="hero-buttons">
+              <a href="#" class="button primary"
+                ><i class="fas fa-camera"></i> Start ASL Translation</a
+              >
+              <a href="#" class="button secondary">Browse Gestures</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1531951634065-2def7c9b465a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80"
+              alt="Person using sign language"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Translator Section -->
+      <section class="translator-section" id="translatorSection">
+        <div class="container">
+          <h2 class="section-title">ASL Translator</h2>
+          <p class="section-description">
+            Use your camera to translate American Sign Language in real-time.
+          </p>
+
+          <div class="tabs">
+            <button class="tab-button active" data-tab="recognize">
+              <i class="fas fa-hand-paper"></i> Recognize Gestures
+            </button>
+            <button class="tab-button" data-tab="history">
+              <i class="fas fa-history"></i> Recent Detections
+            </button>
+          </div>
+
+          <div class="tab-content active" id="recognizeTab">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Hand Gesture Recognition</h3>
+                <span class="badge inactive">Inactive</span>
+              </div>
+              <div class="card-content">
+                <div class="camera-placeholder" id="cameraPlaceholder">
+                  <div class="camera-grid">
+                    <div class="camera-preview">
+                      <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="camera-controls">
+                        <i class="fas fa-camera"></i>
+                        <i class="fas fa-microphone"></i>
+                      </div>
+                    </div>
+                    <div class="translation-preview">
+                      <div class="preview-label">ASL Translation</div>
+                      <div class="translation-text">Hello</div>
+                      <div class="translation-footer">
+                        <span class="confidence">Confidence: 95%</span>
+                        <i class="fas fa-volume-up"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="button primary" id="enableCamera">
+                    <i class="fas fa-camera"></i> Enable Camera to See You
+                  </button>
+                  <p class="privacy-note">
+                    Camera access is required for hand gesture recognition. Your
+                    privacy is important - all processing happens locally.
+                  </p>
+                </div>
+
+                <div class="camera-feed hidden" id="cameraFeed">
+                  <div class="video-container">
+                    <video id="video" autoplay playsinline muted></video>
+                    <canvas id="canvas"></canvas>
+                    <div class="gesture-overlay hidden" id="gestureOverlay">
+                      <div class="gesture-info">
+                        <p class="gesture-text" id="gestureText">Hello</p>
+                        <div class="confidence-container">
+                          <span class="confidence-text" id="confidenceText"
+                            >Confidence: 85%</span
+                          >
+                          <div class="progress-bar">
+                            <div
+                              class="progress-fill"
+                              id="confidenceFill"
+                              style="width: 85%"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="button outline" id="saveGesture">
+                        <i class="fas fa-save"></i> Save
+                      </button>
+                    </div>
+                    <div
+                      class="calibration-overlay hidden"
+                      id="calibrationOverlay"
+                    >
+                      <div class="calibration-content">
+                        <p class="calibration-text">Calibrating...</p>
+                        <div class="progress-bar">
+                          <div
+                            class="progress-fill"
+                            id="calibrationFill"
+                            style="width: 0%"
+                          ></div>
+                        </div>
+                        <p class="calibration-instruction">
+                          Please hold your hand in view of the camera
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="camera-controls">
+                    <button class="button primary" id="toggleRecognition">
+                      <i class="fas fa-hand-paper"></i> Start Recognition
+                    </button>
+                    <div class="control-buttons">
+                      <button class="button icon" id="calibrateButton">
+                        <i class="fas fa-sync-alt"></i>
+                      </button>
+                      <button class="button icon" id="saveButton" disabled>
+                        <i class="fas fa-save"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="tips-box hidden" id="tipsBox">
+                    <h4 class="tips-title">Tips for Better Recognition</h4>
+                    <ul class="tips-list">
+                      <li>Ensure good lighting on your hands</li>
+                      <li>Keep your hand in the center of the frame</li>
+                      <li>Make clear, deliberate gestures</li>
+                      <li>Try to avoid busy backgrounds</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="historyTab">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Recent Detections</h3>
+              </div>
+              <div class="card-content">
+                <div class="empty-state" id="emptyHistory">
+                  <i class="fas fa-hand-paper empty-icon"></i>
+                  <p class="empty-title">No gestures detected yet</p>
+                  <p class="empty-description">
+                    Start recognition to detect hand gestures
+                  </p>
+                </div>
+
+                <ul class="gesture-list hidden" id="gestureList">
+                  <!-- Gesture items will be added here dynamically -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Saved Translations Section -->
+      <section class="saved-translations hidden" id="savedTranslationsSection">
+        <div class="container">
+          <h2 class="section-title">Saved Translations</h2>
+          <div class="card">
+            <div class="card-content">
+              <ul class="translations-list" id="translationsList">
+                <!-- Saved translations will be added here dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+      <div class="modal-content">
+        <button class="close-modal" id="closeAuthModal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="auth-container" id="signInContainer">
+          <h2 class="auth-title">Sign In</h2>
+          <form class="auth-form" id="signInForm">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <div class="password-input">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  data-target="loginPassword"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <p class="error-message" id="loginError"></p>
+            <button type="submit" class="button primary full-width">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+            <p class="auth-switch">
+              Don't have an account?
+              <button type="button" class="link-button" id="switchToSignUp">
+                Sign up
+              </button>
+            </p>
+          </form>
+        </div>
+
+        <div class="auth-container hidden" id="signUpContainer">
+          <h2 class="auth-title">Create Account</h2>
+          <form class="auth-form" id="signUpForm">
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input
+                type="text"
+                id="signupName"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email</label>
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <div class="password-input">
+                <input
+                  type="password"
+                  id="signupPassword"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  data-target="signupPassword"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="signupConfirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="signupConfirmPassword"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <p class="error-message" id="signupError"></p>
+            <button type="submit" class="button primary full-width">
+              <i class="fas fa-user-plus"></i> Create Account
+            </button>
+            <p class="auth-switch">
+              Already have an account?
+              <button type="button" class="link-button" id="switchToSignIn">
+                Sign in
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
