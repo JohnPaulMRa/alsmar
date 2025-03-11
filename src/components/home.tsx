@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useTheme } from "./theme/ThemeProvider";
-import Header from "./layout/Header";
-import MobileMenu from "./layout/MobileMenu";
 import GestureDetail from "./gestures/GestureDetail";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,7 +9,6 @@ import FeatureSection from "./home/FeatureSection";
 import TranslatorPreview from "./home/TranslatorPreview";
 
 const Home = () => {
-  const { theme, toggleTheme } = useTheme();
   const [selectedGestureId, setSelectedGestureId] = useState<string | null>(
     null,
   );
@@ -91,14 +87,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <Header
-        onThemeToggle={toggleTheme}
-        isDarkMode={theme === "dark"}
-        onSearch={(query) => console.log(`Searching for: ${query}`)}
-      />
-
-      <MobileMenu currentTheme={theme} onThemeToggle={toggleTheme} />
-
       {/* Hero Section */}
       <ASLHero />
 

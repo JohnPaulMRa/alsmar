@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ProgressOverview from "@/components/progress/ProgressOverview";
 import GestureStatusLists from "@/components/progress/GestureStatusLists";
-import { Link } from "react-router-dom";
 
 interface Gesture {
   id: string;
@@ -109,22 +106,14 @@ const ProgressPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen">
       <Helmet>
         <title>Your Progress | ASL Learning</title>
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <Link to="/">
-            <Button variant="ghost" className="flex items-center gap-2 mb-4">
-              <ArrowLeft size={16} />
-              Back to Home
-            </Button>
-          </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Your Learning Progress
-          </h1>
+          <h1 className="text-3xl font-bold">Your Learning Progress</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
             Track your ASL learning journey and see how far you've come
           </p>
